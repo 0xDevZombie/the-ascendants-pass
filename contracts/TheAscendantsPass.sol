@@ -133,16 +133,14 @@ contract TheAscendantsPass is ERC1155, ERC1155Supply, ERC1155Burnable, Ownable {
         _mint(msg.sender, GIFT_OF_ZEUS, 1, "");
     }
 
-    function curatorAward(uint256 tokenId) external //TODO WORK FOR HADES
+    function curatorAward(uint256 tokenId, uint256 quantity) external
     isValidTokenId(tokenId)
     isBelowMaxSupply(tokenId)
     onlyOwner {
-        if (tokenId == GIFT_OF_ZEUS)
-            revert TokenIdNotAllowed(); // dev: curator award not allowed for this tokenId
         if (_tokenIdToCuratorAwardClaimed[tokenId])
             revert CuratorTeamAwardLimit(); // dev: cannot claim curator award again
         _tokenIdToCuratorAwardClaimed[tokenId] = true;
-        _mint(curatorTeamAddress, GIFT_OF_POSEIDON, 45, "");
+        _mint(curatorTeamAddress, tokenId, quantity, "");
     }
 
     function withdrawFunds() external virtual onlyOwner {

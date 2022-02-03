@@ -18,7 +18,7 @@ def deployed_contract():
     nft_contract.setMaxTokenSupply(Token_ID.GIFT_OF_ZEUS.value, 1)
     nft_contract.setMaxTokenSupply(Token_ID.GIFT_OF_POSEIDON.value, 555)
     nft_contract.togglePrivateSaleOpen(Token_ID.GIFT_OF_POSEIDON.value)
-    nft_contract.curatorAward(Token_ID.GIFT_OF_POSEIDON.value)
+    nft_contract.curatorAward(Token_ID.GIFT_OF_POSEIDON.value, 40)
     return nft_contract
 
 

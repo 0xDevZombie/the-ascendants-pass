@@ -19,26 +19,34 @@ def deployed_contract():
 def test_can_call_curator_award(deployed_contract):
     deployed_contract.setMaxTokenSupply(Token_ID.GIFT_OF_POSEIDON.value, 55)
     assert deployed_contract.balanceOf(accounts[0], Token_ID.GIFT_OF_POSEIDON.value) == 0
-    deployed_contract.curatorAward(Token_ID.GIFT_OF_POSEIDON.value)
-    assert deployed_contract.balanceOf(accounts[0], Token_ID.GIFT_OF_POSEIDON.value) == 40
+    deployed_contract.curatorAward(Token_ID.GIFT_OF_POSEIDON.value, 45)
+    assert deployed_contract.balanceOf(accounts[0], Token_ID.GIFT_OF_POSEIDON.value) == 45
     assert deployed_contract.exists(2)
 
-
-def test_cannot_call_curator_award_twice(deployed_contract):
-    deployed_contract.setMaxTokenSupply(Token_ID.GIFT_OF_POSEIDON.value, 100)
-    deployed_contract.curatorAward(Token_ID.GIFT_OF_POSEIDON.value)
-    with reverts("dev: cannot claim curator award again"):
-        deployed_contract.curatorAward(Token_ID.GIFT_OF_POSEIDON.value)
-
-def test_cannot_call_curator_award_for_goz(deployed_contract):
+def test_can_call_curator_award_all_tokens(deployed_contract):
     deployed_contract.setMaxTokenSupply(Token_ID.GIFT_OF_ZEUS.value, 55)
-    with reverts("dev: curator award not allowed for this tokenId"):
-        deployed_contract.curatorAward(Token_ID.GIFT_OF_ZEUS.value)
+    deployed_contract.setMaxTokenSupply(Token_ID.GIFT_OF_POSEIDON.value, 55)
+    deployed_contract.setMaxTokenSupply(Token_ID.GIFT_OF_HADES.value, 55)
+    deployed_contract.curatorAward(Token_ID.GIFT_OF_ZEUS.value, 45)
+    deployed_contract.curatorAward(Token_ID.GIFT_OF_POSEIDON.value, 45)
+    deployed_contract.curatorAward(Token_ID.GIFT_OF_HADES.value, 45)
+    assert deployed_contract.balanceOf(accounts[0], Token_ID.GIFT_OF_ZEUS.value) == 45
+    assert deployed_contract.balanceOf(accounts[0], Token_ID.GIFT_OF_POSEIDON.value) == 45
+    assert deployed_contract.balanceOf(accounts[0], Token_ID.GIFT_OF_HADES.value) == 45
+
+
+def test_cannot_call_curator_award_twice_for_same_tokenid(deployed_contract):
+    deployed_contract.setMaxTokenSupply(Token_ID.GIFT_OF_POSEIDON.value, 100)
+    deployed_contract.curatorAward(Token_ID.GIFT_OF_POSEIDON.value, 45)
+    with reverts("dev: cannot claim curator award again"):
+        deployed_contract.curatorAward(Token_ID.GIFT_OF_POSEIDON.value, 45)
+
 
 def test_cannot_breach_max_token_supply(deployed_contract):
     with reverts("dev: max token supply minted"):
-        deployed_contract.curatorAward(Token_ID.GIFT_OF_POSEIDON.value)
+        deployed_contract.curatorAward(Token_ID.GIFT_OF_POSEIDON.value, 45)
 
 
-
-
+def test_cannot_call_on_unknown_token(deployed_contract):
+    with reverts("dev: tokenId unknown"):
+        deployed_contract.curatorAward(4, 45)
