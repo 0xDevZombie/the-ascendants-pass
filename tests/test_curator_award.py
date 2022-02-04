@@ -50,3 +50,8 @@ def test_cannot_breach_max_token_supply(deployed_contract):
 def test_cannot_call_on_unknown_token(deployed_contract):
     with reverts("dev: tokenId unknown"):
         deployed_contract.curatorAward(4, 45)
+
+def test_non_owner_cannot_call(deployed_contract):
+    deployed_contract.setMaxTokenSupply(Token_ID.GIFT_OF_POSEIDON.value, 55)
+    with reverts("Ownable: caller is not the owner"):
+        deployed_contract.curatorAward(2, 45, {"from": accounts[1]})

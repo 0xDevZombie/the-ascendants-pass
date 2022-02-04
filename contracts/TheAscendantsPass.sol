@@ -10,7 +10,7 @@ import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol";
 
 
-
+// @dev @0xDevZombie
 contract TheAscendantsPass is ERC1155, ERC1155Supply, ERC1155Burnable, Ownable {
     string public name = "gift of the gods";
     string public symbol = "GODS";
@@ -30,6 +30,7 @@ contract TheAscendantsPass is ERC1155, ERC1155Supply, ERC1155Burnable, Ownable {
     mapping(uint256 => bool) private _tokenIdToCuratorAwardClaimed;
     bool burnMintEnabled;
     address payable internal curatorTeamAddress;
+    address payable internal payoutTeamAddress;
 
     mapping(address => User) addressToUser;
     struct User {
@@ -208,3 +209,4 @@ contract TheAscendantsPass is ERC1155, ERC1155Supply, ERC1155Burnable, Ownable {
     }
 
 }
+
