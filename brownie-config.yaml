@@ -15,3 +15,23 @@ dotenv: .env
 wallets:
   from_key: ${PRIVATE_KEY}
 
+networks:
+    default: development
+    development:
+        gas_limit: max
+        gas_buffer: 2
+        gas_price: 0
+        max_fee: null
+        priority_fee: null
+        reverting_tx_gas_limit: max
+        default_contract_owner: true
+        cmd_settings: null
+    live:
+        gas_limit: auto
+        gas_buffer: 2.2
+#        gas_price: auto
+        gas_price: 150 gwei
+        max_fee: null
+        priority_fee: null
+        reverting_tx_gas_limit: false
+        default_contract_owner: false

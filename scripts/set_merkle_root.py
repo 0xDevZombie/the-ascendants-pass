@@ -7,6 +7,6 @@ def main():
     dev = accounts.add(config["wallets"]["from_key"])
     print(network.show_active())
     deployed_contract = TheAscendantsPass[len(TheAscendantsPass) - 1]
-    deployed_contract.setTokenIdToMerkleRoot(1, "0x6d2236811f8af82a90939617e52217847b079ed0099b01e3f976849fc72d93b4", {"from": dev})
-    deployed_contract.setTokenIdToMerkleRoot(2, "0x6d2236811f8af82a90939617e52217847b079ed0099b01e3f976849fc72d93b4", {"from": dev})
+    # deployed_contract.setTokenIdToMerkleRoot(1, "0x922a4c61218604bea044b635d2d87a6c379a6f3886a173fca8e959dae35cffc4", {"from": dev})
+    deployed_contract.setTokenIdToMerkleRoot(2, "0xd835fcdfa6cb64a3e50a7bbff689011d3468fee6da184a396652cfcf9b5824c4", {"from": dev})
 

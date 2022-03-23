@@ -47,8 +47,8 @@ def test_cannot_mint_below_mint_price(deployed_contract):
 # def test_cannot_mint_more_then_cap_goz(deployed_contract):
 #     for x in range(888):
 #         new_acc = accounts.add()
-#         accounts[1].transfer(new_acc, web3.toWei(0.2, "ether"))
+#         accounts[2].transfer(new_acc, web3.toWei(0.2, "ether"))
 #         deployed_contract.addToWhiteList([new_acc], {"from": accounts[0]})
-#         deployed_contract.safeMint(new_acc, {"from": new_acc, "value": web3.toWei(0.1, "ether")})
+#         deployed_contract.safeMint(new_acc, {"from": new_acc, "value": web3.toWei(0.2, "ether")})
 #     with reverts("dev: max token supply minted"):
-#         deployed_contract.safeMint(accounts[0], {"value": web3.toWei(0.1, "ether")})
+#         deployed_contract.safeMint(accounts[0], {"value": web3.toWei(0.2, "ether")})

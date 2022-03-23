@@ -12,8 +12,9 @@ import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol";
 
 // @dev @0xDevZombie
 contract TheAscendantsPass is ERC1155, ERC1155Supply, ERC1155Burnable, Ownable {
-    string public name = "gift of the gods";
-    string public symbol = "GODS";
+
+    string public name = "The Ascendants - Gifts of The Gods";
+    string public symbol = "GOTG";
 
     uint256 public constant GIFT_OF_ZEUS = 1;
     uint256 public constant GIFT_OF_POSEIDON = 2;
@@ -190,6 +191,10 @@ contract TheAscendantsPass is ERC1155, ERC1155Supply, ERC1155Burnable, Ownable {
 
     function getTokenIdToRemainingMints(uint256 tokenId) external view returns (uint256) {
         return _tokenIdToTokenLimit[tokenId] - _tokenIdToCounter[tokenId].current();
+    }
+
+    function getTokenIdToMaxSupply(uint256 tokenId) external view returns (uint256) {
+        return _tokenIdToTokenLimit[tokenId];
     }
 
 

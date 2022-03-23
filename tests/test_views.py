@@ -37,3 +37,9 @@ def test_can_view_remaining_mints_gop(deployed_contract):
     deployed_contract.privateMint(Token_ID.GIFT_OF_POSEIDON.value, accounts_merkle_proof[1],
                                   {"from": accounts[1], "value": web3.toWei("0.2", "ether")})
     assert deployed_contract.getTokenIdToRemainingMints(Token_ID.GIFT_OF_POSEIDON.value) == 98
+
+
+def test_can_view_max_supply(deployed_contract):
+    deployed_contract.setMaxTokenSupply(Token_ID.GIFT_OF_ZEUS.value, 10)
+    assert deployed_contract.getTokenIdToMaxSupply(Token_ID.GIFT_OF_ZEUS.value) == 10
+

@@ -1,5 +1,5 @@
 import pytest
-from brownie import TheAscendantsPass, network, accounts, reverts, web3
+from brownie import TheAscendantsPaPass, network, accounts, reverts, web3
 from .tokenID import Token_ID
 from .merkle_proofs import accounts_merkle_proof
 
